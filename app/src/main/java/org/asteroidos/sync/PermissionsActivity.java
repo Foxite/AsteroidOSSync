@@ -60,6 +60,17 @@ public class PermissionsActivity extends MaterialIntroActivity {
             boolean externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
 
+            SlideFragment calendarFragment = new SlideFragmentBuilder()
+                    .backgroundColor(R.color.colorintroslide3)
+                    .buttonsColor(R.color.colorintroslide3button)
+                    .neededPermissions(new String[]{Manifest.permission.READ_CALENDAR})
+                    .image(R.drawable.calendar_icon)
+                    .title(getString(R.string.intro_slide_calendar_title))
+                    .description(getString(R.string.intro_slide_calendar_subtitle))
+                    .build();
+            boolean calendarFragmentShown = (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED);
+
             SlideFragmentBuilder localizationFragmentBuilder = new SlideFragmentBuilder()
                     .backgroundColor(R.color.colorintroslide3)
                     .buttonsColor(R.color.colorintroslide3button)
@@ -106,13 +117,15 @@ public class PermissionsActivity extends MaterialIntroActivity {
                             Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED);
 
             if (externalStorageFragmentShown || localizationFragmentShown ||
-                    notificationFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
+                    notificationFragmentShown || batteryOptimFragmentShown ||
+                    phoneStateFragmentShown || calendarFragmentShown) {
                 addSlide(welcomeFragment);
                 if (externalStorageFragmentShown) addSlide(externalStorageFragment);
                 if (localizationFragmentShown) addSlide(localizationFragment);
                 if (notificationFragmentShown) addSlide(notificationFragment);
                 if (batteryOptimFragmentShown) addSlide(batteryOptimFragment);
                 if (phoneStateFragmentShown) addSlide(phoneStateFragment);
+                if (calendarFragmentShown) addSlide(calendarFragment);
             } else
                 startMainActivity();
         } else {

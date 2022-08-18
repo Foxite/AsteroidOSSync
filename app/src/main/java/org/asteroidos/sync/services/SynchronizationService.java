@@ -45,6 +45,7 @@ import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.asteroid.AsteroidBleManager;
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
+import org.asteroidos.sync.connectivity.CalendarService;
 import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
@@ -293,6 +294,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             registerBleService(new WeatherService(getApplicationContext(), this));
             registerBleService(new ScreenshotService(getApplicationContext(), this));
             registerBleService(new TimeService(getApplicationContext(), this));
+            registerBleService(new CalendarService(getApplicationContext(), this));
         }
 
         handleConnect();
